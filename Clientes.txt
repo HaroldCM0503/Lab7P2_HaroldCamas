@@ -4,4 +4,4 @@
 	Maitro de Obra
 	1
 	200000
-]
+];

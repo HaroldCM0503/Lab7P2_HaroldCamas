@@ -1,42 +1,42 @@
 package lab7p2_haroldcamas;
 
 public class Ventas {
-    Vendedor vendedor;
-    Cliente cliente;
-    Vehiculo carro;
+    String vendedor;
+    String cliente;
+    String carro;
     int costo;
 
     public Ventas() {
     }
 
-    public Ventas(Vendedor vendedor, Cliente cliente, Vehiculo carro, int costo) {
+    public Ventas(String vendedor, String cliente, String carro, int costo) {
         this.vendedor = vendedor;
         this.cliente = cliente;
         this.carro = carro;
-        this.costo = carro.getPrecioVenta();
+        this.costo = costo;
     }
 
-    public Vendedor getVendedor() {
+    public String getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(Vendedor vendedor) {
+    public void setVendedor(String vendedor) {
         this.vendedor = vendedor;
     }
 
-    public Cliente getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    public Vehiculo getCarro() {
+    public String getCarro() {
         return carro;
     }
 
-    public void setCarro(Vehiculo carro) {
+    public void setCarro(String carro) {
         this.carro = carro;
     }
 

@@ -1,13 +1,18 @@
 package lab7p2_haroldcamas;
 
 import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
@@ -64,6 +69,15 @@ public class Main extends javax.swing.JFrame {
         sp_salario = new javax.swing.JSpinner();
         bt_agregarClientes = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        sp_costo = new javax.swing.JSpinner();
+        cb_vendedores = new javax.swing.JComboBox<>();
+        cb_clientes = new javax.swing.JComboBox<>();
+        cb_vehiculos = new javax.swing.JComboBox<>();
+        bt_agregarVenta = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -282,15 +296,61 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cliente", jPanel3);
 
+        jLabel14.setText("Vendedor");
+
+        jLabel15.setText("Cliente");
+
+        jLabel16.setText("Vehiculo");
+
+        jLabel17.setText("Costo de la Transaccion");
+
+        bt_agregarVenta.setText("Agregar ");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14))
+                .addGap(107, 107, 107)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_vendedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(sp_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cb_vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(124, 124, 124)
+                .addComponent(bt_agregarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(cb_vendedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(cb_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(cb_vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bt_agregarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(sp_costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ventas", jPanel4);
@@ -335,7 +395,7 @@ public class Main extends javax.swing.JFrame {
         }
         else{
             Vehiculo c = new Vehiculo(tf_marca.getText(),
-                    bt_color.getBackground(), 
+                    bt_color.getBackground().toString(), 
                     tf_modelo.getText(), 
                     (int) sp_año.getModel().getValue(), 
                     (int) sp_precio.getModel().getValue());
@@ -352,9 +412,10 @@ public class Main extends javax.swing.JFrame {
                 bw.write("[\n" +
                         "\t" + c.getMarca() + "\n" +
                         "\t" + c.getModelo() + "\n" +
+                        "\t" + c.getColor() + "\n" +
                         "\t" + c.getAño() + "\n" +
                         "\t" + c.getPrecioVenta() + "\n" +
-                        "]");
+                        "];");
                 bw.newLine();
                 bw.flush();
                 
@@ -402,7 +463,7 @@ public class Main extends javax.swing.JFrame {
                         "\t" + v.getNombre() + "\n" +
                         "\t" + v.getCarrosVendidos() + "\n" +
                         "\t" + v.getDineroGenerado() + "\n" +
-                        "]");
+                        "];");
                 bw.newLine();
                 bw.flush();
                 
@@ -456,7 +517,7 @@ public class Main extends javax.swing.JFrame {
                         "\t" + c.getProfesion() + "\n" +
                         "\t" + c.getCantidadComprados() + "\n" +
                         "\t" + c.getSueldo() + "\n" +
-                        "]");
+                        "];");
                 bw.newLine();
                 bw.flush();
                 
@@ -515,7 +576,55 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public static DefaultComboBoxModel refresh(File file, DefaultComboBoxModel modelo) throws FileNotFoundException{
+        ArrayList lista = new ArrayList();
+        Scanner sc = new Scanner(file);
+        String texto = "";
+        while(sc.hasNext()){
+            texto += sc.nextLine();
+        }
+        sc.close();
+        
+        String[] informacion = texto.split(";");
+        String[] valores = new String[informacion[0].length() - 2];
+        for (int i = 0; i < informacion.length; i++) {
+            for (int j = 0; j < valores.length; j++) {
+                valores[j] = informacion[j + 1];
+            }
+            if(file.getName() == "Vehiculos"){
+                Vehiculo v = new Vehiculo(valores[0], 
+                        valores[1], 
+                        valores[2], 
+                        Integer.parseInt(valores[3]), 
+                        Integer.parseInt(valores[4]));
+                
+                lista.add(v);
+            }
+            else if(file.getName() == "Clientes"){
+                Cliente c = new Cliente(valores[0], 
+                        Integer.parseInt(valores[1]), 
+                        valores[2], 
+                        Integer.parseInt(valores[3]), 
+                        Integer.parseInt(valores[4]));
+                
+                lista.add(c);
+            }
+            else{
+                Vendedor v = new Vendedor(valores[0], 
+                        Integer.parseInt(valores[1]), 
+                        Integer.parseInt(valores[2]));
+                
+                lista.add(v);
+            }
+        }
+        
+        modelo.removeAllElements();
+        for (Object object : lista) {
+            modelo.addElement(object);
+        }
+        return modelo;
+    }
     
     ArrayList<Vehiculo> vehiculos = new ArrayList();
     ArrayList<Vendedor> vendedores =  new ArrayList();
@@ -525,12 +634,20 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_agregarClientes;
     private javax.swing.JButton bt_agregarVehiculo;
     private javax.swing.JButton bt_agregarVendedor;
+    private javax.swing.JButton bt_agregarVenta;
     private javax.swing.JButton bt_color;
+    private javax.swing.JComboBox<String> cb_clientes;
+    private javax.swing.JComboBox<String> cb_vehiculos;
+    private javax.swing.JComboBox<String> cb_vendedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -548,6 +665,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner sp_año;
     private javax.swing.JSpinner sp_carrosComprados;
     private javax.swing.JSpinner sp_carrosVendidos;
+    private javax.swing.JSpinner sp_costo;
     private javax.swing.JSpinner sp_dineroGenerado;
     private javax.swing.JSpinner sp_edad;
     private javax.swing.JSpinner sp_precio;
