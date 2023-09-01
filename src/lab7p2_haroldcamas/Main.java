@@ -52,6 +52,17 @@ public class Main extends javax.swing.JFrame {
         sp_dineroGenerado = new javax.swing.JSpinner();
         bt_agregarVendedor = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        tf_nombreCliente = new javax.swing.JTextField();
+        sp_edad = new javax.swing.JSpinner();
+        tf_profesion = new javax.swing.JTextField();
+        sp_carrosComprados = new javax.swing.JSpinner();
+        sp_salario = new javax.swing.JSpinner();
+        bt_agregarClientes = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
 
@@ -198,15 +209,75 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Vendedor", jPanel2);
 
+        jLabel9.setText("Nombre");
+
+        jLabel10.setText("Edad");
+
+        jLabel11.setText("Profesion");
+
+        jLabel12.setText("Carros Comprados");
+
+        jLabel13.setText("Salario");
+
+        bt_agregarClientes.setText("Agregar");
+        bt_agregarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_agregarClientesMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9))
+                .addGap(88, 88, 88)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_nombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(sp_edad)
+                            .addComponent(sp_salario))
+                        .addComponent(tf_profesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sp_carrosComprados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(151, 151, 151)
+                .addComponent(bt_agregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tf_nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(sp_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(tf_profesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(sp_carrosComprados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bt_agregarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(sp_salario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cliente", jPanel3);
@@ -245,7 +316,7 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -354,6 +425,62 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_agregarVendedorMouseClicked
 
+    private void bt_agregarClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarClientesMouseClicked
+        if(tf_nombreCliente.getText().equals("") || 
+                (int) sp_edad.getModel().getValue() <= 0 ||
+                tf_profesion.getText().equals("") ||
+                (int) sp_carrosComprados.getModel().getValue() <= 0 ||
+                (int) sp_salario.getModel().getValue() <= 0){
+            JOptionPane.showMessageDialog(this, "Tiene que llenar todas las casillas!");
+        }
+        else{
+            Cliente c = new Cliente(tf_nombreCliente.getText(), 
+                    (int) sp_edad.getModel().getValue(), 
+                    tf_profesion.getText(), 
+                    (int) sp_carrosComprados.getModel().getValue(), 
+                    (int) sp_salario.getModel().getValue());
+            
+            clientes.add(c);
+            
+            File file = null;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            
+            try {
+                file = new File("./Clientes.txt");
+                fw = new FileWriter(file,true);
+                bw = new BufferedWriter(fw);
+                bw.write("[\n" +
+                        "\t" + c.getNombre() + "\n" +
+                        "\t" + c.getEdad() + "\n" +
+                        "\t" + c.getProfesion() + "\n" +
+                        "\t" + c.getCantidadComprados() + "\n" +
+                        "\t" + c.getSueldo() + "\n" +
+                        "]");
+                bw.newLine();
+                bw.flush();
+                
+                tf_nombreCliente.setText("");
+                sp_edad.getModel().setValue(0);
+                tf_profesion.setText("");
+                sp_carrosComprados.getModel().setValue(0);
+                sp_salario.getModel().setValue(0);
+                
+                JOptionPane.showMessageDialog(this, "Cliente añadido exitosamente!");
+            } 
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            try {
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_bt_agregarClientesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -395,10 +522,15 @@ public class Main extends javax.swing.JFrame {
     ArrayList<Cliente> clientes =  new ArrayList();
     ArrayList<Ventas> ventas =  new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_agregarClientes;
     private javax.swing.JButton bt_agregarVehiculo;
     private javax.swing.JButton bt_agregarVendedor;
     private javax.swing.JButton bt_color;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -406,6 +538,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -413,11 +546,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JSpinner sp_año;
+    private javax.swing.JSpinner sp_carrosComprados;
     private javax.swing.JSpinner sp_carrosVendidos;
     private javax.swing.JSpinner sp_dineroGenerado;
+    private javax.swing.JSpinner sp_edad;
     private javax.swing.JSpinner sp_precio;
+    private javax.swing.JSpinner sp_salario;
     private javax.swing.JTextField tf_marca;
     private javax.swing.JTextField tf_modelo;
+    private javax.swing.JTextField tf_nombreCliente;
     private javax.swing.JTextField tf_nombreVendedor;
+    private javax.swing.JTextField tf_profesion;
     // End of variables declaration//GEN-END:variables
 }
