@@ -16,6 +16,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class Main extends javax.swing.JFrame {
 
@@ -91,6 +93,16 @@ public class Main extends javax.swing.JFrame {
         bt_agregarVenta = new javax.swing.JButton();
         bt_cerrarDia = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tr_total = new javax.swing.JTree();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tr_delDia = new javax.swing.JTree();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ta_modificarJSON = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        bt_elegirDia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -377,15 +389,74 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Ventas", jPanel4);
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Admin");
+        tr_total.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(tr_total);
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Dia");
+        tr_delDia.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane2.setViewportView(tr_delDia);
+
+        ta_modificarJSON.setColumns(20);
+        ta_modificarJSON.setRows(5);
+        jScrollPane3.setViewportView(ta_modificarJSON);
+
+        jLabel17.setText("Datos Totales");
+
+        jLabel18.setText("Datos del Dia");
+
+        jLabel19.setText("Modificar JSON");
+
+        bt_elegirDia.setText("Elegir Dia");
+        bt_elegirDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_elegirDiaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_elegirDia))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))))
+                .addGap(23, 23, 23))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)
+                            .addComponent(bt_elegirDia))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Base de Datos", jPanel5);
@@ -669,6 +740,14 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_cerrarDiaMouseClicked
 
+    private void bt_elegirDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_elegirDiaMouseClicked
+        DefaultTreeModel m=(DefaultTreeModel) tr_delDia.getModel();
+        JFileChooser jfc = new JFileChooser();
+        File file = jfc.getSelectedFile();
+        m.setRoot(new DefaultMutableTreeNode(file.getName()));
+        
+    }//GEN-LAST:event_bt_elegirDiaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -774,6 +853,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_agregarVenta;
     private javax.swing.JButton bt_cerrarDia;
     private javax.swing.JButton bt_color;
+    private javax.swing.JButton bt_elegirDia;
     private javax.swing.JComboBox<String> cb_clientes;
     private javax.swing.JComboBox<String> cb_vehiculos;
     private javax.swing.JComboBox<String> cb_vendedores;
@@ -785,6 +865,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -798,6 +881,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JSpinner sp_año;
     private javax.swing.JSpinner sp_carrosComprados;
@@ -806,10 +892,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner sp_edad;
     private javax.swing.JSpinner sp_precio;
     private javax.swing.JSpinner sp_salario;
+    private javax.swing.JTextArea ta_modificarJSON;
     private javax.swing.JTextField tf_marca;
     private javax.swing.JTextField tf_modelo;
     private javax.swing.JTextField tf_nombreCliente;
     private javax.swing.JTextField tf_nombreVendedor;
     private javax.swing.JTextField tf_profesion;
+    private javax.swing.JTree tr_delDia;
+    private javax.swing.JTree tr_total;
     // End of variables declaration//GEN-END:variables
 }
