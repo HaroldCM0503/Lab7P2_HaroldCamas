@@ -5,3 +5,87 @@
 	2018
 	150000
 ];
+[
+	Nissan
+	Versa
+	java.awt.Color[r=255,g=102,b=102]
+	2008
+	150000
+];
+[
+	BMW
+	Rapido
+	java.awt.Color[r=204,g=0,b=204]
+	2002
+	100000
+];
+[
+	Ferrari
+	XS3000
+	java.awt.Color[r=102,g=102,b=255]
+	2018
+	1000000
+];
+[
+	BMW
+	Serr
+	java.awt.Color[r=51,g=51,b=51]
+	2021
+	1000000
+];
+[
+	Ferrari
+	XS2000
+	java.awt.Color[r=204,g=0,b=0]
+	2022
+	1000000
+];
+[
+	Nissan
+	Corolla
+	java.awt.Color[r=0,g=0,b=0]
+	2013
+	160000
+];
+[
+	Toyota
+	Miat
+	java.awt.Color[r=255,g=0,b=0]
+	1993
+	200000
+];
+[
+	Renault
+	Vix
+	java.awt.Color[r=153,g=153,b=153]
+	2023
+	200000
+];
+[
+	Nissan
+	Versa
+	java.awt.Color[r=255,g=51,b=51]
+	2021
+	400000
+];
+[
+	Ferrari
+	Rapido
+	java.awt.Color[r=204,g=0,b=51]
+	2011
+	1000000
+];
+[
+	Toyota
+	Prado
+	java.awt.Color[r=255,g=153,b=153]
+	2009
+	230000
+];
+[
+	Kya
+	Picante
+	java.awt.Color[r=0,g=255,b=51]
+	2019
+	240000
+];

@@ -21,9 +21,21 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    public Main() {
+    public Main() throws FileNotFoundException {
         initComponents();
         this.setResizable(false);
+        
+        DefaultComboBoxModel m = (DefaultComboBoxModel) cb_vehiculos.getModel();
+        m = refresh(new File("./Vehiculos.txt"), m);
+        cb_vehiculos.setModel(m);
+        
+        DefaultComboBoxModel m2 = (DefaultComboBoxModel) cb_vendedores.getModel();
+        m2 = refresh(new File("./Vendedores.txt"), m2);
+        cb_vendedores.setModel(m2);
+        
+        DefaultComboBoxModel m3 = (DefaultComboBoxModel) cb_clientes.getModel();
+        m3 = refresh(new File("./Clientes.txt"), m3);
+        cb_clientes.setModel(m3);
     }
 
     /**
@@ -427,6 +439,10 @@ public class Main extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(this, "Vehiculo agregado exitosamente!");
                 
+                DefaultComboBoxModel m = (DefaultComboBoxModel) cb_vehiculos.getModel();
+                m = refresh(file, m);
+                cb_vehiculos.setModel(m);
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -472,6 +488,10 @@ public class Main extends javax.swing.JFrame {
                 sp_dineroGenerado.getModel().setValue(0);
                 
                 JOptionPane.showMessageDialog(this, "Vendedor añadido exitosamente!");
+                
+                DefaultComboBoxModel m = (DefaultComboBoxModel) cb_vendedores.getModel();
+                m = refresh(file, m);
+                cb_vendedores.setModel(m);
             } 
             catch (Exception e) {
                 e.printStackTrace();
@@ -528,6 +548,10 @@ public class Main extends javax.swing.JFrame {
                 sp_salario.getModel().setValue(0);
                 
                 JOptionPane.showMessageDialog(this, "Cliente añadido exitosamente!");
+                
+                DefaultComboBoxModel m = (DefaultComboBoxModel) cb_clientes.getModel();
+                m = refresh(file, m);
+                cb_clientes.setModel(m);
             } 
             catch (Exception e) {
                 e.printStackTrace();
@@ -572,7 +596,11 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                try {
+                    new Main().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -587,21 +615,26 @@ public class Main extends javax.swing.JFrame {
         sc.close();
         
         String[] informacion = texto.split(";");
-        String[] valores = new String[informacion[0].length() - 2];
+        String[] lineas = informacion[0].split("\t");
+        String[] valores = new String[lineas.length - 1];
+        
         for (int i = 0; i < informacion.length; i++) {
             for (int j = 0; j < valores.length; j++) {
-                valores[j] = informacion[j + 1];
+                lineas = informacion[i].split("\t");
+                valores[j] = lineas[j + 1];
             }
-            if(file.getName() == "Vehiculos"){
+            if(file.getName().equals("Vehiculos.txt")){
+                valores[4] = valores[4].substring(0, valores[4].length() - 1);
                 Vehiculo v = new Vehiculo(valores[0], 
-                        valores[1], 
                         valores[2], 
+                        valores[1], 
                         Integer.parseInt(valores[3]), 
                         Integer.parseInt(valores[4]));
                 
                 lista.add(v);
             }
-            else if(file.getName() == "Clientes"){
+            else if(file.getName().equals("Clientes.txt")){
+                valores[4] = valores[4].substring(0, valores[4].length() - 1);
                 Cliente c = new Cliente(valores[0], 
                         Integer.parseInt(valores[1]), 
                         valores[2], 
@@ -611,6 +644,7 @@ public class Main extends javax.swing.JFrame {
                 lista.add(c);
             }
             else{
+                valores[2] = valores[2].substring(0, valores[2].length() - 1);
                 Vendedor v = new Vendedor(valores[0], 
                         Integer.parseInt(valores[1]), 
                         Integer.parseInt(valores[2]));

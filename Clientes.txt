@@ -5,3 +5,17 @@
 	1
 	200000
 ];
+[
+	Javier
+	25
+	Albañil
+	2
+	240000
+];
+[
+	Haziel
+	20
+	Estudiante
+	1
+	150000
+];
