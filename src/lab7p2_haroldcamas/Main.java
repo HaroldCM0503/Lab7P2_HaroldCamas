@@ -99,12 +99,14 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tr_delDia = new javax.swing.JTree();
         jScrollPane3 = new javax.swing.JScrollPane();
-        ta_modificarJSON = new javax.swing.JTextArea();
+        txa_modificar = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         bt_elegirDia = new javax.swing.JButton();
         bt_refrescar = new javax.swing.JButton();
+        bt_elegirArchivo = new javax.swing.JButton();
+        bt_modificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -407,9 +409,9 @@ public class Main extends javax.swing.JFrame {
         tr_delDia.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane2.setViewportView(tr_delDia);
 
-        ta_modificarJSON.setColumns(20);
-        ta_modificarJSON.setRows(5);
-        jScrollPane3.setViewportView(ta_modificarJSON);
+        txa_modificar.setColumns(20);
+        txa_modificar.setRows(5);
+        jScrollPane3.setViewportView(txa_modificar);
 
         jLabel17.setText("Datos Totales");
 
@@ -428,6 +430,20 @@ public class Main extends javax.swing.JFrame {
         bt_refrescar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_refrescarMouseClicked(evt);
+            }
+        });
+
+        bt_elegirArchivo.setText("Elegir Archivo");
+        bt_elegirArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_elegirArchivoMouseClicked(evt);
+            }
+        });
+
+        bt_modificar.setText("Modificar");
+        bt_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_modificarMouseClicked(evt);
             }
         });
 
@@ -451,10 +467,19 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(bt_elegirDia))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jLabel19)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(bt_elegirArchivo))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bt_modificar)
+                                .addGap(94, 94, 94)))))
                 .addGap(23, 23, 23))
         );
         jPanel5Layout.setVerticalGroup(
@@ -473,10 +498,14 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(bt_elegirArchivo))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87)))
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_modificar)
+                        .addGap(46, 46, 46)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -486,7 +515,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -898,6 +927,48 @@ public class Main extends javax.swing.JFrame {
         m.reload();
     }//GEN-LAST:event_bt_refrescarMouseClicked
 
+    private void bt_elegirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_elegirArchivoMouseClicked
+        JFileChooser jfc = new JFileChooser();
+        int s = jfc.showOpenDialog(this);
+        archivoElegido = jfc.getSelectedFile();
+        
+        Scanner sc;
+        try {
+            sc = new Scanner(archivoElegido);
+            String texto = "";
+            while(sc.hasNext()){
+                texto += sc.nextLine() + "\n";
+            }
+            sc.close();
+            txa_modificar.setText(texto);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_elegirArchivoMouseClicked
+
+    private void bt_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_modificarMouseClicked
+        if(archivoElegido == null){
+            JOptionPane.showMessageDialog(this, "Tiene que elegir un archivo primero!");
+        }
+        else{
+            File file = archivoElegido;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            
+            try {
+                fw = new FileWriter(file);
+                bw = new BufferedWriter(fw);
+                
+                bw.write(txa_modificar.getText());
+                bw.flush();
+            } catch (Exception e) {
+            }
+            
+            txa_modificar.setText("");
+            archivoElegido = null;
+            JOptionPane.showMessageDialog(this, "JSON modificado exitosamente!");
+        }
+    }//GEN-LAST:event_bt_modificarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -992,6 +1063,7 @@ public class Main extends javax.swing.JFrame {
         return modelo;
     }
     
+    File archivoElegido = null;
     ArrayList<Vehiculo> vehiculos = new ArrayList();
     ArrayList<Vendedor> vendedores =  new ArrayList();
     ArrayList<Cliente> clientes =  new ArrayList();
@@ -1003,7 +1075,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_agregarVenta;
     private javax.swing.JButton bt_cerrarDia;
     private javax.swing.JButton bt_color;
+    private javax.swing.JButton bt_elegirArchivo;
     private javax.swing.JButton bt_elegirDia;
+    private javax.swing.JButton bt_modificar;
     private javax.swing.JButton bt_refrescar;
     private javax.swing.JComboBox<String> cb_clientes;
     private javax.swing.JComboBox<String> cb_vehiculos;
@@ -1043,7 +1117,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner sp_edad;
     private javax.swing.JSpinner sp_precio;
     private javax.swing.JSpinner sp_salario;
-    private javax.swing.JTextArea ta_modificarJSON;
     private javax.swing.JTextField tf_marca;
     private javax.swing.JTextField tf_modelo;
     private javax.swing.JTextField tf_nombreCliente;
@@ -1051,5 +1124,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField tf_profesion;
     private javax.swing.JTree tr_delDia;
     private javax.swing.JTree tr_total;
+    private javax.swing.JTextArea txa_modificar;
     // End of variables declaration//GEN-END:variables
 }
