@@ -13,9 +13,16 @@
 	240000
 ];
 [
-	Haziel
+	Diego
 	20
 	Estudiante
 	1
 	150000
+];
+[
+	Osman
+	47
+	Maestro
+	12
+	12400000
 ];
