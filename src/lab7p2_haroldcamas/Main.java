@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 
 public class Main extends javax.swing.JFrame {
 
@@ -743,9 +744,46 @@ public class Main extends javax.swing.JFrame {
     private void bt_elegirDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_elegirDiaMouseClicked
         DefaultTreeModel m=(DefaultTreeModel) tr_delDia.getModel();
         JFileChooser jfc = new JFileChooser();
+        int s = jfc.showOpenDialog(this);
         File file = jfc.getSelectedFile();
         m.setRoot(new DefaultMutableTreeNode(file.getName()));
+        DefaultMutableTreeNode lista = new DefaultMutableTreeNode("Ventas:");
+        ((DefaultMutableTreeNode) m.getRoot()).add(lista);
         
+        Scanner sc;
+        try {
+            sc = new Scanner(file);
+            String texto = "";
+            while(sc.hasNext()){
+                texto += sc.nextLine();
+            }
+            sc.close();
+            
+            ArrayList<DefaultMutableTreeNode> nodos = new ArrayList();
+            String[] informacion = texto.split(";");
+            int cc = 1;
+            for (String bloque : informacion) {
+                DefaultMutableTreeNode venta = new DefaultMutableTreeNode("Venta " + cc);
+                String[] datos = bloque.split("\t");
+                
+                DefaultMutableTreeNode vendedor = new DefaultMutableTreeNode(datos[1]);
+                DefaultMutableTreeNode comprador = new DefaultMutableTreeNode(datos[2]);
+                
+                venta.add(vendedor);
+                venta.add(comprador);
+                nodos.add(venta);
+                cc++;
+            }
+            
+            for (DefaultMutableTreeNode nodo : nodos) {
+                lista.add(nodo);
+            }
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        
+        m.reload();
     }//GEN-LAST:event_bt_elegirDiaMouseClicked
 
     /**
