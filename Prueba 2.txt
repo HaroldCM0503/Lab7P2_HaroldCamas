@@ -1,0 +1,18 @@
+[
+	Norman
+	Pedro
+	Nissan Corolla
+	160000
+];
+[
+	Marco
+	Haziel
+	Nissan Versa
+	150000
+];
+[
+	Marco
+	Haziel
+	Ferrari XS2000
+	1000000
+];

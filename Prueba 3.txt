@@ -1,0 +1,6 @@
+[
+	Harold
+	Pedro
+	Ford Runner
+	150000
+];

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
@@ -84,12 +85,11 @@ public class Main extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        sp_costo = new javax.swing.JSpinner();
         cb_vendedores = new javax.swing.JComboBox<>();
         cb_clientes = new javax.swing.JComboBox<>();
         cb_vehiculos = new javax.swing.JComboBox<>();
         bt_agregarVenta = new javax.swing.JButton();
+        bt_cerrarDia = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -314,9 +314,19 @@ public class Main extends javax.swing.JFrame {
 
         jLabel16.setText("Vehiculo");
 
-        jLabel17.setText("Costo de la Transaccion");
+        bt_agregarVenta.setText("Agregar venta al dia");
+        bt_agregarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_agregarVentaMouseClicked(evt);
+            }
+        });
 
-        bt_agregarVenta.setText("Agregar ");
+        bt_cerrarDia.setText("Cerrar Dia");
+        bt_cerrarDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_cerrarDiaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -326,18 +336,20 @@ public class Main extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel17)
                     .addComponent(jLabel15)
                     .addComponent(jLabel14))
-                .addGap(107, 107, 107)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cb_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_vendedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(sp_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cb_vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(124, 124, 124)
-                .addComponent(bt_agregarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_vendedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_vehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(124, 124, 124)
+                        .addComponent(bt_agregarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(bt_cerrarDia, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -358,11 +370,9 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel16)
                             .addComponent(cb_vehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(bt_agregarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(sp_costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addGap(89, 89, 89)
+                .addComponent(bt_cerrarDia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ventas", jPanel4);
@@ -566,6 +576,99 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_agregarClientesMouseClicked
 
+    private void bt_agregarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarVentaMouseClicked
+        if(cb_vendedores.getSelectedIndex() == -1 || cb_clientes.getSelectedIndex() == -1 || cb_vehiculos.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "Tiene que elegir todos los parametros!");
+        }
+        else{
+            Ventas v = new Ventas(cb_vendedores.getSelectedItem().toString(), 
+                    cb_clientes.getSelectedItem().toString(), 
+                    cb_vehiculos.getSelectedItem().toString(), 
+                    ((Vehiculo) cb_vehiculos.getSelectedItem()).getPrecioVenta());
+            
+            File file = null;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            
+            try {
+                file = new File("./Ventas.txt");
+                fw = new FileWriter(file,true);
+                bw = new BufferedWriter(fw);
+                bw.write("[\n" +
+                        "\t" + v.getVendedor() + "\n" +
+                        "\t" + v.getCliente() + "\n" +
+                        "\t" + v.getCarro() + "\n" +
+                        "\t" + v.getCosto() + "\n" +
+                        "];");
+                bw.newLine();
+                bw.flush();
+                
+            } 
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            try {
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+            ventas.add(v);
+            cb_vendedores.setSelectedIndex(-1);
+            cb_clientes.setSelectedIndex(-1);
+            cb_vehiculos.setSelectedIndex(-1);
+            
+            JOptionPane.showMessageDialog(this, "Venta añadida con exito!");
+        }
+    }//GEN-LAST:event_bt_agregarVentaMouseClicked
+
+    private void bt_cerrarDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_cerrarDiaMouseClicked
+        if(ventas.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Tiene que tener en un dia para cerrarla!");
+        }
+        else{
+            JFileChooser jfc = new JFileChooser();
+            int seleccion = jfc.showSaveDialog(this);
+
+            if(seleccion == JFileChooser.APPROVE_OPTION){
+                File file = new File(jfc.getSelectedFile().getPath() + ".txt");
+                FileWriter fw = null;
+                BufferedWriter bw = null;
+
+                try {
+                    fw = new FileWriter(file);
+                    bw = new BufferedWriter(fw);
+                    for (Ventas v : ventas) {
+                        bw.write("[\n" +
+                            "\t" + v.getVendedor() + "\n" +
+                            "\t" + v.getCliente() + "\n" +
+                            "\t" + v.getCarro() + "\n" +
+                            "\t" + v.getCosto() + "\n" +
+                            "];");
+                        bw.newLine();
+                    }
+                    bw.flush();
+                    ventas.clear();
+                    JOptionPane.showMessageDialog(this, "Archivo del dia terminado!");
+                } 
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    bw.close();
+                    fw.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+
+            }
+        }
+    }//GEN-LAST:event_bt_cerrarDiaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -669,6 +772,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_agregarVehiculo;
     private javax.swing.JButton bt_agregarVendedor;
     private javax.swing.JButton bt_agregarVenta;
+    private javax.swing.JButton bt_cerrarDia;
     private javax.swing.JButton bt_color;
     private javax.swing.JComboBox<String> cb_clientes;
     private javax.swing.JComboBox<String> cb_vehiculos;
@@ -681,7 +785,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -699,7 +802,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner sp_año;
     private javax.swing.JSpinner sp_carrosComprados;
     private javax.swing.JSpinner sp_carrosVendidos;
-    private javax.swing.JSpinner sp_costo;
     private javax.swing.JSpinner sp_dineroGenerado;
     private javax.swing.JSpinner sp_edad;
     private javax.swing.JSpinner sp_precio;
