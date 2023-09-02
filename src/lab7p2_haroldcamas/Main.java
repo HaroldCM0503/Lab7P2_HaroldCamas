@@ -104,6 +104,7 @@ public class Main extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         bt_elegirDia = new javax.swing.JButton();
+        bt_refrescar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -391,6 +392,14 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.addTab("Ventas", jPanel4);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Admin");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Clientes");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Vendedores");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Vehiculos");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Ventas");
+        treeNode1.add(treeNode2);
         tr_total.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(tr_total);
 
@@ -415,6 +424,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        bt_refrescar.setText("Refrescar");
+        bt_refrescar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_refrescarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -422,9 +438,12 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_refrescar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel18)
@@ -447,7 +466,8 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(jLabel18)
-                            .addComponent(bt_elegirDia))
+                            .addComponent(bt_elegirDia)
+                            .addComponent(bt_refrescar))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -466,7 +486,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -786,6 +806,98 @@ public class Main extends javax.swing.JFrame {
         m.reload();
     }//GEN-LAST:event_bt_elegirDiaMouseClicked
 
+    private void bt_refrescarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_refrescarMouseClicked
+        DefaultTreeModel m=(DefaultTreeModel) tr_total.getModel();
+        
+        //Clientes
+        DefaultMutableTreeNode nodoClientes = (DefaultMutableTreeNode) m.getChild(m.getRoot(), 0);
+        nodoClientes.removeAllChildren();
+        File Clientes = new File("./Clientes.txt");
+        Scanner sc;
+        try {
+            sc = new Scanner(Clientes);
+            String texto = "";
+            while(sc.hasNext()){
+                texto += sc.nextLine();
+            }
+            sc.close();
+            String[] informacion = texto.split(";");
+            for (String bloque : informacion) {
+                String[] datos = bloque.split("\t");
+                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(datos[1]);
+                nodoClientes.add(nodo);
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        //Vendedores
+        DefaultMutableTreeNode nodoVendedores = (DefaultMutableTreeNode) m.getChild(m.getRoot(), 1);
+        nodoVendedores.removeAllChildren();
+        File vendedor = new File("./Vendedores.txt");
+        try {
+            sc = new Scanner(vendedor);
+            String texto = "";
+            while(sc.hasNext()){
+                texto += sc.nextLine();
+            }
+            sc.close();
+            String[] informacion = texto.split(";");
+            for (String bloque : informacion) {
+                String[] datos = bloque.split("\t");
+                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(datos[1]);
+                nodoVendedores.add(nodo);
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        //Vehiculos
+        DefaultMutableTreeNode nodoVehiculos = (DefaultMutableTreeNode) m.getChild(m.getRoot(), 2);
+        nodoVehiculos.removeAllChildren();
+        File Vehiculos = new File("./Vehiculos.txt");
+        try {
+            sc = new Scanner(Vehiculos);
+            String texto = "";
+            while(sc.hasNext()){
+                texto += sc.nextLine();
+            }
+            sc.close();
+            String[] informacion = texto.split(";");
+            for (String bloque : informacion) {
+                String[] datos = bloque.split("\t");
+                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(datos[1] + " " + datos[2]);
+                nodoVehiculos.add(nodo);
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        //Ventas
+        DefaultMutableTreeNode nodoVentas = (DefaultMutableTreeNode) m.getChild(m.getRoot(), 3);
+        nodoVentas.removeAllChildren();
+        File Ventas = new File("./Ventas.txt");
+        try {
+            sc = new Scanner(Ventas);
+            String texto = "";
+            while(sc.hasNext()){
+                texto += sc.nextLine();
+            }
+            sc.close();
+            String[] informacion = texto.split(";");
+            for (String bloque : informacion) {
+                String[] datos = bloque.split("\t");
+                datos[4] = datos[4].substring(0, datos[4].length() - 1);
+                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(datos[1] + ", " + datos[2] + ", " + datos[4]);
+                nodoVentas.add(nodo);
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        m.reload();
+    }//GEN-LAST:event_bt_refrescarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -892,6 +1004,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_cerrarDia;
     private javax.swing.JButton bt_color;
     private javax.swing.JButton bt_elegirDia;
+    private javax.swing.JButton bt_refrescar;
     private javax.swing.JComboBox<String> cb_clientes;
     private javax.swing.JComboBox<String> cb_vehiculos;
     private javax.swing.JComboBox<String> cb_vendedores;
